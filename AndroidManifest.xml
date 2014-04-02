@@ -30,6 +30,10 @@
             android:name="com.SpartanTech.schedule.AssignmentActivity"
             android:label="@string/title_activity_assignment" >
         </activity>
+        <activity
+            android:name="com.SpartanTech.schedule.AssignmentInfoActivity"
+            android:label="@string/title_activity_assignment_info" >
+        </activity>
     </application>
 
 </manifest>

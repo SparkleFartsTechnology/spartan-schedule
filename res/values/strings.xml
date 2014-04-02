@@ -11,5 +11,6 @@
     <string name="classButton">Assignments</string>
     <string name="title_activity_assignment">Assignments</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_assignment_info">Assignment Information</string>
 
 </resources>

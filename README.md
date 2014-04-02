@@ -1,1 +1,1 @@
-#Spartach Schedule app is a small app focusesed around scheduling classes and assignments for students
+Spartan Schedule is an application focused on scheduling for students

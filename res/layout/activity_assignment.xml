@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".AssignmentActivity"
+    android:id="@+id/assignmentLayout" >
+
+    <ScrollView
+        android:id="@+id/assignmentMainScroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </ScrollView>
+    
+    <Button 
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_alignParentBottom="true"
+        android:text="Add Assignment"
+        android:onClick="addAssignment"/>
+    
+</RelativeLayout>

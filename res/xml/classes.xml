@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <EditTextPreference
+    	android:key="pref_class1"
+    	android:title="Class 1 Set"
+    	android:defaultValue="Default"/>
+    
+    <EditTextPreference
+    	android:key="pref_class2"
+    	android:title="Class 2 Set"
+    	android:defaultValue="Default"/>
+    
+    <EditTextPreference
+    	android:key="pref_class3"
+    	android:title="Class 3 Set"
+    	android:defaultValue="Default"/>
+    
+    <EditTextPreference
+    	android:key="pref_class4"
+    	android:title="Class 4 Set"
+    	android:defaultValue="Default"/>
+    
+    <EditTextPreference
+    	android:key="pref_class5"
+    	android:title="Class 5 Set"
+    	android:defaultValue="Default"/>
+    
+    <EditTextPreference
+    	android:key="pref_class6"
+    	android:title="Class 6 Set"
+    	android:defaultValue="Default"/>
+	
+	<EditTextPreference
+    	android:key="pref_class7"
+    	android:title="Class 7 Set"
+    	android:defaultValue="Default"/>
+    
+    <EditTextPreference
+    	android:key="pref_class8"
+    	android:title="Class 8 Set"
+    	android:defaultValue="Default"/>
+
+</PreferenceScreen>

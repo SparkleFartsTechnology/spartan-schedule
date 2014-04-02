@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Spartan Schedule</string>
+    <string name="action_settings">Settings</string>
+    <string name="schedule_title">Classes</string>
+    <string name="class_default">Default</string>
+    <string name="title_activity_settings_fragment">SettingsFragment</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_set_preference">SetPreferenceActivity</string>
+    <string name="classButton">Assignments</string>
+    <string name="title_activity_assignment">Assignments</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

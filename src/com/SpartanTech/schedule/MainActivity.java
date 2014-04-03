@@ -2,6 +2,7 @@ package com.SpartanTech.schedule;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +24,7 @@ public class MainActivity extends Activity {
 
 	int classCount;
 	int tempClassCount;
+	int classDeleteId;
 	final Context context = this;
 	LinearLayout classLayout;
 	LinearLayout.LayoutParams Params;
@@ -108,29 +110,8 @@ public class MainActivity extends Activity {
 	OnLongClickListener deleteClass = new OnLongClickListener() {
 		@Override
 		public boolean onLongClick(View v) {
-			SharedPreferences pref = PreferenceManager
-					.getDefaultSharedPreferences(context);
-			tempClassCount = 0;
-			while (pref.contains("class" + Integer.toString(tempClassCount))) {
-				if (tempClassCount > v.getId()) {
-					tempClassBin = pref.getString(
-							"class" + Integer.toString(tempClassCount),
-							"Transfer Error");
-					pref.edit()
-							.remove("class" + Integer.toString(tempClassCount))
-							.putString(
-									"class"
-											+ Integer
-													.toString(tempClassCount - 1),
-									tempClassBin).commit();
-				} else if (tempClassCount == v.getId()) {
-					pref.edit()
-							.remove("class" + Integer.toString(tempClassCount))
-							.commit();
-				}
-				tempClassCount = tempClassCount + 1;
-			}
-			loadClass();
+			classDeleteId = v.getId();
+			showConfirm();
 			return false;
 		}
 	};
@@ -161,6 +142,41 @@ public class MainActivity extends Activity {
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		pref.edit().putString("class" + classCount, userInput).commit();
+	}
+	
+	void showConfirm() {
+	    DialogFragment newFragment = ConfirmDelete.newInstance(
+	            R.string.confirm_delete_class, "class");
+	    newFragment.show(getFragmentManager(), "dialog");
+	}
+
+	public void doPositiveClick() {
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		tempClassCount = 0;
+		while (pref.contains("class" + Integer.toString(tempClassCount))) {
+			if (tempClassCount > classDeleteId) {
+				tempClassBin = pref.getString(
+						"class" + Integer.toString(tempClassCount),
+						"Transfer Error");
+				pref.edit()
+						.remove("class" + Integer.toString(tempClassCount))
+						.putString(
+								"class"
+										+ Integer
+												.toString(tempClassCount - 1),
+								tempClassBin).commit();
+			} else if (tempClassCount == classDeleteId) {
+				pref.edit()
+						.remove("class" + Integer.toString(tempClassCount))
+						.commit();
+			}
+			tempClassCount = tempClassCount + 1;
+		}
+		loadClass();
+	}
+
+	public void doNegativeClick() {
 	}
 
 }

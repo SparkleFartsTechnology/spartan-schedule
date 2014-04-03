@@ -2,6 +2,7 @@ package com.SpartanTech.schedule;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,8 +27,9 @@ public class AssignmentActivity extends Activity {
 	String tempAssignmentBin;
 	int tempAssignmentCount;
 	int assignmentCount;
+	int assignmentDeleteId;
 	LinearLayout.LayoutParams Params;
-	String[] assignmentData;
+	String assignmentDate;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,6 @@ public class AssignmentActivity extends Activity {
 			assignmentIndex = (String) bundle.get("Index");
 		}
 		loadAssignment();
-		assignmentData = new String[2];
 	}
 
 	OnClickListener assignmentClick = new OnClickListener() {
@@ -51,9 +52,7 @@ public class AssignmentActivity extends Activity {
 		public void onClick(View v) {
 			SharedPreferences pref = PreferenceManager
 					.getDefaultSharedPreferences(context);
-			Intent intent = new Intent(context, AssignmentInfoActivity.class);
-			intent.putExtra("assignmentData", assignmentData);
-			startActivity(intent);
+			assignmentDate = pref.getString(assignmentIndex + + v.getId() + "assignmentDate", null);
 
 		}
 	};
@@ -62,33 +61,8 @@ public class AssignmentActivity extends Activity {
 
 		@Override
 		public boolean onLongClick(View v) {
-			SharedPreferences pref = PreferenceManager
-					.getDefaultSharedPreferences(context);
-			tempAssignmentCount = 0;
-			while (pref.contains(assignmentIndex
-					+ Integer.toString(tempAssignmentCount))) {
-				if (tempAssignmentCount > v.getId()) {
-					tempAssignmentBin = pref.getString(assignmentIndex
-							+ Integer.toString(tempAssignmentCount),
-							"Transfer Error");
-					pref.edit()
-							.remove(assignmentIndex
-									+ Integer.toString(tempAssignmentCount))
-							.putString(
-									assignmentIndex
-											+ Integer
-													.toString(tempAssignmentCount - 1),
-									tempAssignmentBin).commit();
-				} else if (tempAssignmentCount == v.getId()) {
-					pref.edit()
-							.remove(assignmentIndex
-									+ Integer.toString(tempAssignmentCount))
-							.commit();
-				}
-				tempAssignmentCount = tempAssignmentCount + 1;
-
-			}
-			loadAssignment();
+			assignmentDeleteId = v.getId();
+			showConfirm();
 			return false;
 		}
 
@@ -157,5 +131,42 @@ public class AssignmentActivity extends Activity {
 		pref.edit().putString(assignmentIndex + assignmentCount, userInput)
 				.commit();
 	}
+	void showConfirm() {
+	    DialogFragment newFragment = ConfirmDelete.newInstance(R.string.confirm_delete_assignment, "assignment");
+	    newFragment.show(getFragmentManager(), "dialog");
+	}
 
+	public void doPositiveClick() {
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		tempAssignmentCount = 0;
+		while (pref.contains(assignmentIndex
+				+ Integer.toString(tempAssignmentCount))) {
+			if (tempAssignmentCount > assignmentDeleteId) {
+				tempAssignmentBin = pref.getString(assignmentIndex
+						+ Integer.toString(tempAssignmentCount),
+						"Transfer Error");
+				pref.edit()
+						.remove(assignmentIndex
+								+ Integer.toString(tempAssignmentCount))
+						.putString(
+								assignmentIndex
+										+ Integer
+												.toString(tempAssignmentCount - 1),
+								tempAssignmentBin).commit();
+			} else if (tempAssignmentCount == assignmentDeleteId) {
+				pref.edit()
+						.remove(assignmentIndex
+								+ Integer.toString(tempAssignmentCount))
+						.commit();
+			}
+			tempAssignmentCount = tempAssignmentCount + 1;
+
+		}
+		loadAssignment();
+	}
+
+	public void doNegativeClick() {
+	    
+	}
 }

@@ -31,7 +31,7 @@
             android:label="@string/title_activity_assignment" >
         </activity>
         <activity
-            android:name="com.SpartanTech.schedule.AssignmentInfoActivity"
+            android:name="com.SpartanTech.schedule.ConfirmDelete"
             android:label="@string/title_activity_assignment_info" >
         </activity>
     </application>

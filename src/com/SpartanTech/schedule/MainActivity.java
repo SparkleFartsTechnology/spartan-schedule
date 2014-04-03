@@ -176,7 +176,6 @@ public class MainActivity extends Activity {
 		loadClass();
 	}
 
-	public void doNegativeClick() {
-	}
+
 
 }

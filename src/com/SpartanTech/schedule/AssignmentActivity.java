@@ -165,8 +165,4 @@ public class AssignmentActivity extends Activity {
 		}
 		loadAssignment();
 	}
-
-	public void doNegativeClick() {
-	    
-	}
 }

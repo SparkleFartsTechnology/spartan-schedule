@@ -10,16 +10,16 @@ public class ConfirmDelete extends DialogFragment {
 	public static ConfirmDelete newInstance(int title, String type) {
 		ConfirmDelete frag = new ConfirmDelete();
 		Bundle args = new Bundle();
-        args.putInt("title", title);
-        args.putString("type", type);
-        frag.setArguments(args);
+		args.putInt("title", title);
+		args.putString("type", type);
+		frag.setArguments(args);
 		return frag;
 	}
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		 int title = getArguments().getInt("title");
-		 final String type = getArguments().getString("type");
+		int title = getArguments().getInt("title");
+		final String type = getArguments().getString("type");
 
 		return new AlertDialog.Builder(getActivity())
 				.setTitle(title)
@@ -27,11 +27,12 @@ public class ConfirmDelete extends DialogFragment {
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int whichButton) {
-								if(type == "assignment"){
-								((AssignmentActivity) getActivity())
-										.doPositiveClick();
-								}else if(type == "class"){
-									((MainActivity) getActivity()).doPositiveClick();
+								if (type == "assignment") {
+									((AssignmentActivity) getActivity())
+											.doPositiveClick();
+								} else if (type == "class") {
+									((MainActivity) getActivity())
+											.doPositiveClick();
 								}
 							}
 						})
@@ -39,12 +40,6 @@ public class ConfirmDelete extends DialogFragment {
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int whichButton) {
-								if(type == "assignment"){
-									((AssignmentActivity) getActivity())
-											.doNegativeClick();
-									}else if(type == "class"){
-										((MainActivity) getActivity()).doNegativeClick();
-									}
 							}
 						}).create();
 	}

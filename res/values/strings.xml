@@ -16,5 +16,6 @@
     <string name="alert_dialog_cancel">Cancel</string>
     <string name="confirm_delete_assignment">Delete this assignment?</string>
     <string name="confirm_delete_class">Delete this Class?</string>
+    <string name="title_activity_due_assignment">Assignments Due</string>
 
 </resources>

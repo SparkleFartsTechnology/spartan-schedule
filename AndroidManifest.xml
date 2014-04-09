@@ -34,6 +34,10 @@
             android:name="com.SpartanTech.schedule.ConfirmDelete"
             android:label="@string/title_activity_assignment_info" >
         </activity>
+        <activity
+            android:name="com.SpartanTech.schedule.AlarmNotification"
+            android:label="@string/title_activity_due_assignment" >
+        </activity>
     </application>
 
 </manifest>

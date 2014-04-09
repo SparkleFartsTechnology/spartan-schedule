@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -174,6 +175,7 @@ public class MainActivity extends Activity {
 			tempClassCount = tempClassCount + 1;
 		}
 		loadClass();
+		 Toast.makeText(context, "Class Deleted", Toast.LENGTH_LONG).show();
 	}
 
 

@@ -1,8 +1,12 @@
 package com.SpartanTech.schedule;
 
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +21,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class AssignmentActivity extends Activity {
 
@@ -29,7 +35,9 @@ public class AssignmentActivity extends Activity {
 	int assignmentCount;
 	int assignmentDeleteId;
 	LinearLayout.LayoutParams Params;
-	String assignmentDate;
+	private AlarmManager alarmMgr;
+	private PendingIntent alarmIntent;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +58,7 @@ public class AssignmentActivity extends Activity {
 	OnClickListener assignmentClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			SharedPreferences pref = PreferenceManager
-					.getDefaultSharedPreferences(context);
-			assignmentDate = pref.getString(assignmentIndex + + v.getId() + "assignmentDate", null);
-
+			
 		}
 	};
 
@@ -100,6 +105,10 @@ public class AssignmentActivity extends Activity {
 		alertDialog.show();
 
 	}
+	
+	public void addTime(View v){
+		
+	}
 
 	private void loadAssignment() {
 		scroll.removeView(assignmentLayout);
@@ -131,6 +140,22 @@ public class AssignmentActivity extends Activity {
 		pref.edit().putString(assignmentIndex + assignmentCount, userInput)
 				.commit();
 	}
+	
+	
+	public void onTimeSet(TimePicker view, int hourOfDay, int minute){
+		alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+		Intent intent = new Intent(context, AlarmNotification.class);
+		alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+		calendar.set(Calendar.MINUTE, minute);
+
+		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+		        AlarmManager.INTERVAL_DAY, alarmIntent);
+	}
+	
 	void showConfirm() {
 	    DialogFragment newFragment = ConfirmDelete.newInstance(R.string.confirm_delete_assignment, "assignment");
 	    newFragment.show(getFragmentManager(), "dialog");
@@ -164,5 +189,6 @@ public class AssignmentActivity extends Activity {
 
 		}
 		loadAssignment();
+		 Toast.makeText(context, "Assignment Deleted", Toast.LENGTH_LONG).show();
 	}
 }

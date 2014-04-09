@@ -21,10 +21,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class AssignmentActivity extends Activity {
+public class AssignmentActivity extends Activity  {
 
 	final Context context = this;
 	ScrollView scroll;
@@ -106,8 +105,25 @@ public class AssignmentActivity extends Activity {
 
 	}
 	
-	public void addTime(View v){
+	public void setTime(){
+		alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+		Intent intent = new Intent(context, AlarmNotification.class);
+		alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		calendar.set(Calendar.HOUR_OF_DAY, 14);
+		calendar.set(Calendar.MINUTE, 30);
+
+		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+		        AlarmManager.INTERVAL_DAY, alarmIntent);
+	}
+	
+	
+	public void setReminder(){
+		DialogFragment newFragment = new TimePickerFragment();
+	    newFragment.show(getFragmentManager(), "Select Time for Reminder");
+	    
 	}
 
 	private void loadAssignment() {
@@ -142,19 +158,6 @@ public class AssignmentActivity extends Activity {
 	}
 	
 	
-	public void onTimeSet(TimePicker view, int hourOfDay, int minute){
-		alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-		Intent intent = new Intent(context, AlarmNotification.class);
-		alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-		
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(System.currentTimeMillis());
-		calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-		calendar.set(Calendar.MINUTE, minute);
-
-		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-		        AlarmManager.INTERVAL_DAY, alarmIntent);
-	}
 	
 	void showConfirm() {
 	    DialogFragment newFragment = ConfirmDelete.newInstance(R.string.confirm_delete_assignment, "assignment");

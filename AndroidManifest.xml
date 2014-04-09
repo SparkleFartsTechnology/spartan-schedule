@@ -38,6 +38,10 @@
             android:name="com.SpartanTech.schedule.AlarmNotification"
             android:label="@string/title_activity_due_assignment" >
         </activity>
+        <activity
+            android:name="com.SpartanTech.schedule.TimePickerFragment"
+            android:label="@string/title_activity_time_picker_fragment" >
+        </activity>
     </application>
 
 </manifest>

@@ -23,7 +23,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AssignmentActivity extends Activity  {
+public class AssignmentActivity extends Activity {
 
 	final Context context = this;
 	ScrollView scroll;
@@ -36,7 +36,6 @@ public class AssignmentActivity extends Activity  {
 	LinearLayout.LayoutParams Params;
 	private AlarmManager alarmMgr;
 	private PendingIntent alarmIntent;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +56,7 @@ public class AssignmentActivity extends Activity  {
 	OnClickListener assignmentClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			
+
 		}
 	};
 
@@ -104,26 +103,31 @@ public class AssignmentActivity extends Activity  {
 		alertDialog.show();
 
 	}
-	
-	public void setTime(){
-		alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+
+	public void setTime(int hourOfDay, int minute) {
+		alarmMgr = (AlarmManager) context
+				.getSystemService(Context.ALARM_SERVICE);
 		Intent intent = new Intent(context, AlarmNotification.class);
 		alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-		
+
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(System.currentTimeMillis());
-		calendar.set(Calendar.HOUR_OF_DAY, 14);
-		calendar.set(Calendar.MINUTE, 30);
+		calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+		calendar.set(Calendar.MINUTE, minute);
 
-		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-		        AlarmManager.INTERVAL_DAY, alarmIntent);
+		if (alarmMgr != null) {
+			alarmMgr.cancel(alarmIntent);
+		}
+
+		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+				calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
+				alarmIntent);
 	}
-	
-	
-	public void setReminder(){
+
+	public void setReminder(View v) {
 		DialogFragment newFragment = new TimePickerFragment();
-	    newFragment.show(getFragmentManager(), "Select Time for Reminder");
-	    
+		newFragment.show(getFragmentManager(), "Select Time for Reminder");
+
 	}
 
 	private void loadAssignment() {
@@ -156,12 +160,11 @@ public class AssignmentActivity extends Activity  {
 		pref.edit().putString(assignmentIndex + assignmentCount, userInput)
 				.commit();
 	}
-	
-	
-	
+
 	void showConfirm() {
-	    DialogFragment newFragment = ConfirmDelete.newInstance(R.string.confirm_delete_assignment, "assignment");
-	    newFragment.show(getFragmentManager(), "dialog");
+		DialogFragment newFragment = ConfirmDelete.newInstance(
+				R.string.confirm_delete_assignment, "assignment");
+		newFragment.show(getFragmentManager(), "dialog");
 	}
 
 	public void doPositiveClick() {
@@ -171,9 +174,11 @@ public class AssignmentActivity extends Activity  {
 		while (pref.contains(assignmentIndex
 				+ Integer.toString(tempAssignmentCount))) {
 			if (tempAssignmentCount > assignmentDeleteId) {
-				tempAssignmentBin = pref.getString(assignmentIndex
-						+ Integer.toString(tempAssignmentCount),
-						"Transfer Error");
+				tempAssignmentBin = pref
+						.getString(
+								assignmentIndex
+										+ Integer.toString(tempAssignmentCount),
+								"Transfer Error");
 				pref.edit()
 						.remove(assignmentIndex
 								+ Integer.toString(tempAssignmentCount))
@@ -192,6 +197,6 @@ public class AssignmentActivity extends Activity  {
 
 		}
 		loadAssignment();
-		 Toast.makeText(context, "Assignment Deleted", Toast.LENGTH_LONG).show();
+		Toast.makeText(context, "Assignment Deleted", Toast.LENGTH_LONG).show();
 	}
 }

@@ -23,10 +23,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.SpartanTech.schedule.PreferenceActivity"
-            android:label="@string/title_activity_set_preference" >
-        </activity>
-        <activity
             android:name="com.SpartanTech.schedule.AssignmentActivity"
             android:label="@string/title_activity_assignment" >
         </activity>
@@ -42,6 +38,11 @@
             android:name="com.SpartanTech.schedule.TimePickerFragment"
             android:label="@string/title_activity_time_picker_fragment" >
         </activity>
+        <activity
+            android:name="com.SpartanTech.schedule.AlarmReciever"
+            android:label="@string/title_activity_alarm_reciever" >
+        </activity>
+        <receiver android:name=".AlarmReciever" />
     </application>
 
 </manifest>

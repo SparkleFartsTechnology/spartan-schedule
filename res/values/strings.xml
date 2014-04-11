@@ -18,5 +18,6 @@
     <string name="confirm_delete_class">Delete this Class?</string>
     <string name="title_activity_due_assignment">Assignments Due</string>
     <string name="title_activity_time_picker_fragment">Set Time</string>
+    <string name="title_activity_alarm_reciever">AlarmReciever</string>
 
 </resources>

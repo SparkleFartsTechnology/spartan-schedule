@@ -1,21 +1,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/assignmentLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context=".AssignmentActivity"
-    android:id="@+id/assignmentLayout" >
+    tools:context=".AssignmentActivity" >
 
     <ScrollView
         android:id="@+id/assignmentMainScroll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
     </ScrollView>
-    
-    <Button 
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:layout_alignParentBottom="true"
-        android:text="Add Assignment"
-        android:onClick="addAssignment"/>
-    
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="setReminder"
+        android:text="Set Reminder Time" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="addAssignment"
+        android:text="Add Assignment" />
+
 </RelativeLayout>

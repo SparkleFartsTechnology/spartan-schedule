@@ -107,7 +107,7 @@ public class AssignmentActivity extends Activity {
 	public void setTime(int hourOfDay, int minute) {
 		alarmMgr = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
-		Intent intent = new Intent(context, AlarmNotification.class);
+		Intent intent = new Intent(context, AlarmReceiver.class);
 		alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
 		Calendar calendar = Calendar.getInstance();
@@ -119,7 +119,7 @@ public class AssignmentActivity extends Activity {
 			alarmMgr.cancel(alarmIntent);
 		}
 
-		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+		alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
 				calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
 				alarmIntent);
 	}

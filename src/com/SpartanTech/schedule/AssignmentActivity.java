@@ -25,15 +25,18 @@ import android.widget.Toast;
 
 public class AssignmentActivity extends Activity {
 
-	final Context context = this;
-	ScrollView scroll;
-	LinearLayout assignmentLayout;
-	String assignmentIndex;
-	String tempAssignmentBin;
-	int tempAssignmentCount;
-	int assignmentCount;
-	int assignmentDeleteId;
-	LinearLayout.LayoutParams Params;
+	private final Context context = this;
+	private ScrollView scroll;
+	private LinearLayout assignmentLayout;
+	private String assignmentIndex;
+	private String tempAssignmentBin;
+	private String displayText;
+	private String assignmentDate;
+	private int tempAssignmentCount;
+	private int assignmentCount;
+	private int assignmentDeleteId;
+	private int assignmentDateId;
+	private LinearLayout.LayoutParams Params;
 	private AlarmManager alarmMgr;
 	private PendingIntent alarmIntent;
 
@@ -53,10 +56,16 @@ public class AssignmentActivity extends Activity {
 		loadAssignment();
 	}
 
+	public String checkDigit(int number) {
+		return number <= 9 ? "0" + number : String.valueOf(number);
+	}
+
 	OnClickListener assignmentClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-
+			assignmentDateId = v.getId();
+			DialogFragment newFragment = new DatePickerFragment();
+			newFragment.show(getFragmentManager(), "Set Due Date");
 		}
 	};
 
@@ -104,7 +113,7 @@ public class AssignmentActivity extends Activity {
 
 	}
 
-	public void setTime(int hourOfDay, int minute) {
+	public void setReminderTime(int hourOfDay, int minute) {
 		alarmMgr = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		Intent intent = new Intent(context, AlarmReceiver.class);
@@ -140,14 +149,24 @@ public class AssignmentActivity extends Activity {
 		assignmentCount = 0;
 		while (pref.contains(assignmentIndex
 				+ Integer.toString(assignmentCount))) {
+			displayText = pref.getString(
+					assignmentIndex + Integer.toString(assignmentCount),
+					"Default");
 			TextView newDisplay = new TextView(this);
 			newDisplay.setId(assignmentCount);
 			newDisplay.setOnClickListener(assignmentClick);
 			newDisplay.setOnLongClickListener(deleteAssignment);
 			newDisplay.setTextSize(15);
-			newDisplay.setText(pref.getString(
-					assignmentIndex + Integer.toString(assignmentCount),
-					"Default"));
+			if (pref.contains(assignmentIndex
+					+ Integer.toString(assignmentCount) + "Date")) {
+				displayText = displayText
+						+ "  Due Date:"
+						+ pref.getString(
+								assignmentIndex
+										+ Integer.toString(assignmentCount)
+										+ "Date", "");
+			}
+			newDisplay.setText(displayText);
 			assignmentLayout.addView(newDisplay);
 			assignmentCount = assignmentCount + 1;
 		}
@@ -161,13 +180,26 @@ public class AssignmentActivity extends Activity {
 				.commit();
 	}
 
+	public void writeAssignmentDate(int month, int day) {
+		assignmentDate = checkDigit(month + 1) + "/" + checkDigit(day);
+		System.out.println(assignmentDate);
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		pref.edit()
+				.putString(
+						assignmentIndex + Integer.toString(assignmentDateId)
+								+ "Date", assignmentDate).commit();
+		loadAssignment();
+
+	}
+
 	void showConfirm() {
 		DialogFragment newFragment = ConfirmDelete.newInstance(
 				R.string.confirm_delete_assignment, "assignment");
 		newFragment.show(getFragmentManager(), "dialog");
 	}
 
-	public void doPositiveClick() {
+	public void PositiveConfirm() {
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		tempAssignmentCount = 0;

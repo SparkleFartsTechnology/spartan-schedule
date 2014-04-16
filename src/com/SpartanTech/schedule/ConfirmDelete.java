@@ -29,7 +29,7 @@ public class ConfirmDelete extends DialogFragment {
 									int whichButton) {
 								if (type == "assignment") {
 									((AssignmentActivity) getActivity())
-											.doPositiveClick();
+											.PositiveConfirm();
 								} else if (type == "class") {
 									((MainActivity) getActivity())
 											.doPositiveClick();

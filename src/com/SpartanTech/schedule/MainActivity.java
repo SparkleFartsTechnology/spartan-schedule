@@ -23,15 +23,15 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	int classCount;
-	int tempClassCount;
-	int classDeleteId;
-	final Context context = this;
-	LinearLayout classLayout;
-	LinearLayout.LayoutParams Params;
-	ScrollView scroll1;
-	String assignmentIndex;
-	String tempClassBin;
+	private int classCount;
+	private int tempClassCount;
+	private int classDeleteId;
+	private final Context context = this;
+	private LinearLayout classLayout;
+	private LinearLayout.LayoutParams Params;
+	private ScrollView scroll1;
+	private String assignmentIndex;
+	private String tempClassBin;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

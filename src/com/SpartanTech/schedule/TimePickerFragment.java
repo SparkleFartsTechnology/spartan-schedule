@@ -23,6 +23,6 @@ public class TimePickerFragment extends DialogFragment implements
 	}
 
 	public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-		((AssignmentActivity) getActivity()).setTime(hourOfDay, minute);
+		((AssignmentActivity) getActivity()).setReminderTime(hourOfDay, minute);
 	}
 }

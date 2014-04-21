@@ -19,7 +19,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 	private void showNotification(Context context) {
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-				new Intent(context, MainActivity.class), 0);
+				new Intent(context, DueAssignmentActvity.class), 0);
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
 				context).setSmallIcon(R.drawable.example_picture)
 				.setContentTitle("Assignment Notification")

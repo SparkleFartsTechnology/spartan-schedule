@@ -38,29 +38,32 @@ public final class R {
         public static final int ic_stat_assignment=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a000a;
-        public static final int add_class=0x7f0a000b;
-        public static final int assignmentInput=0x7f0a0008;
+        public static final int action_settings=0x7f0a000b;
+        public static final int add_class=0x7f0a000c;
+        public static final int assignmentInput=0x7f0a0009;
         public static final int assignmentLayout=0x7f0a0000;
         public static final int assignmentMainScroll=0x7f0a0001;
         public static final int button1=0x7f0a0003;
         public static final int button2=0x7f0a0002;
-        public static final int classInput=0x7f0a0009;
-        public static final int classMainScroll=0x7f0a0006;
-        public static final int mainLayout=0x7f0a0004;
-        public static final int scheduleTitle=0x7f0a0005;
-        public static final int textView1=0x7f0a0007;
+        public static final int classInput=0x7f0a000a;
+        public static final int classMainScroll=0x7f0a0008;
+        public static final int dueMainScroll=0x7f0a0005;
+        public static final int mainLayout=0x7f0a0006;
+        public static final int scheduleTitle=0x7f0a0007;
+        public static final int textView1=0x7f0a0004;
     }
     public static final class layout {
         public static final int activity_assignment=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int prompt_assignment=0x7f030002;
-        public static final int prompt_class=0x7f030003;
+        public static final int activity_due_assignment=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int prompt_assignment=0x7f030003;
+        public static final int prompt_class=0x7f030004;
     }
     public static final class menu {
         public static final int assignment=0x7f090000;
-        public static final int main=0x7f090001;
-        public static final int settings=0x7f090002;
+        public static final int due_assignment_actvity=0x7f090001;
+        public static final int main=0x7f090002;
+        public static final int settings=0x7f090003;
     }
     public static final class string {
         public static final int action_reply=0x7f060015;
@@ -77,34 +80,35 @@ public final class R {
         public static final int confirm_delete_class=0x7f06000e;
         public static final int hello_blank_fragment=0x7f060009;
         public static final int hello_world=0x7f060005;
-        public static final int pref_default_display_name=0x7f06001b;
-        public static final int pref_description_social_recommendations=0x7f060019;
+        public static final int pref_default_display_name=0x7f06001c;
+        public static final int pref_description_social_recommendations=0x7f06001a;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f06001d;
+        public static final int pref_header_data_sync=0x7f06001e;
         /**  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f060017;
+        public static final int pref_header_general=0x7f060018;
         /**  Example settings for Notifications 
          */
-        public static final int pref_header_notifications=0x7f060020;
-        public static final int pref_ringtone_silent=0x7f060023;
-        public static final int pref_title_add_friends_to_messages=0x7f06001c;
-        public static final int pref_title_display_name=0x7f06001a;
-        public static final int pref_title_new_message_notifications=0x7f060021;
-        public static final int pref_title_ringtone=0x7f060022;
-        public static final int pref_title_social_recommendations=0x7f060018;
-        public static final int pref_title_sync_frequency=0x7f06001e;
-        public static final int pref_title_system_sync_settings=0x7f06001f;
-        public static final int pref_title_vibrate=0x7f060024;
+        public static final int pref_header_notifications=0x7f060021;
+        public static final int pref_ringtone_silent=0x7f060024;
+        public static final int pref_title_add_friends_to_messages=0x7f06001d;
+        public static final int pref_title_display_name=0x7f06001b;
+        public static final int pref_title_new_message_notifications=0x7f060022;
+        public static final int pref_title_ringtone=0x7f060023;
+        public static final int pref_title_social_recommendations=0x7f060019;
+        public static final int pref_title_sync_frequency=0x7f06001f;
+        public static final int pref_title_system_sync_settings=0x7f060020;
+        public static final int pref_title_vibrate=0x7f060025;
         public static final int schedule_title=0x7f060002;
         public static final int title_activity_alarm_reciever=0x7f060011;
         public static final int title_activity_assignment=0x7f060008;
         public static final int title_activity_assignment_info=0x7f06000a;
         public static final int title_activity_due_assignment=0x7f06000f;
+        public static final int title_activity_due_assignment_actvity=0x7f060016;
         public static final int title_activity_set_preference=0x7f060006;
-        public static final int title_activity_settings=0x7f060016;
+        public static final int title_activity_settings=0x7f060017;
         public static final int title_activity_settings_fragment=0x7f060004;
         public static final int title_activity_time_picker_fragment=0x7f060010;
     }

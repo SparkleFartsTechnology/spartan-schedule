@@ -41,6 +41,11 @@
             android:enabled="true"
             android:exported="true" >
         </receiver>
+
+        <activity
+            android:name="com.SpartanTech.schedule.DueAssignmentActvity"
+            android:label="@string/title_activity_due_assignment_actvity" >
+        </activity>
     </application>
 
 </manifest>

@@ -56,7 +56,7 @@ public class AssignmentActivity extends Activity {
 		loadAssignment();
 	}
 
-	public String checkDigit(int number) {
+	public String formatDigit(int number) {
 		return number <= 9 ? "0" + number : String.valueOf(number);
 	}
 
@@ -180,9 +180,8 @@ public class AssignmentActivity extends Activity {
 				.commit();
 	}
 
-	public void writeAssignmentDate(int month, int day) {
-		assignmentDate = checkDigit(month + 1) + "/" + checkDigit(day);
-		System.out.println(assignmentDate);
+	public void writeAssignmentDate(int year, int month, int day) {
+		assignmentDate = formatDigit(month + 1) + "/" + formatDigit(day);
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		pref.edit()

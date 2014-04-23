@@ -1,5 +1,6 @@
 package com.SpartanTech.schedule;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import android.app.Activity;
@@ -39,10 +40,13 @@ public class AssignmentActivity extends Activity {
 	private LinearLayout.LayoutParams Params;
 	private AlarmManager alarmMgr;
 	private PendingIntent alarmIntent;
+	private Calendar cal;
+	private SimpleDateFormat sdf;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		sdf = new SimpleDateFormat("M/dd");
 		setContentView(R.layout.activity_assignment);
 		scroll = (ScrollView) findViewById(R.id.assignmentMainScroll);
 		Params = new LinearLayout.LayoutParams(
@@ -54,10 +58,6 @@ public class AssignmentActivity extends Activity {
 			assignmentIndex = (String) bundle.get("Index");
 		}
 		loadAssignment();
-	}
-
-	public String formatDigit(int number) {
-		return number <= 9 ? "0" + number : String.valueOf(number);
 	}
 
 	OnClickListener assignmentClick = new OnClickListener() {
@@ -180,14 +180,20 @@ public class AssignmentActivity extends Activity {
 				.commit();
 	}
 
-	public void writeAssignmentDate(int year, int month, int day) {
-		assignmentDate = formatDigit(month + 1) + "/" + formatDigit(day);
+	public void writeAssignmentDate(int month, int day) {
+		cal = Calendar.getInstance();
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		cal.set(Calendar.MONTH, month);
+		assignmentDate = sdf.format(cal.getTime());
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		pref.edit()
 				.putString(
 						assignmentIndex + Integer.toString(assignmentDateId)
-								+ "Date", assignmentDate).commit();
+								+ "Date", assignmentDate)
+				.putLong(
+						assignmentIndex + Integer.toString(assignmentDateId)
+								+ "MilliDate", cal.getTimeInMillis()).commit();
 		loadAssignment();
 
 	}

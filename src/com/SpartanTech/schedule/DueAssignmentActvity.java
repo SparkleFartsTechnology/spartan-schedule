@@ -1,5 +1,7 @@
 package com.SpartanTech.schedule;
 
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,6 +20,7 @@ public class DueAssignmentActvity extends Activity {
 	private ScrollView scroll;
 	private LinearLayout dueLayout;
 	private LinearLayout.LayoutParams Params;
+	private Calendar cal;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,14 @@ public class DueAssignmentActvity extends Activity {
 				LinearLayout.LayoutParams.WRAP_CONTENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
 		getAssignments();
+	}
+	
+	
+	private void getDates(String Index){
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		cal.setTimeInMillis(pref.getLong(Index, 0));
+		cal.add(Calendar.DAY_OF_MONTH, 1);
 	}
 
 	private void getAssignments() {

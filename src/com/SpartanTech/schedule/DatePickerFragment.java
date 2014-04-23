@@ -21,6 +21,6 @@ public class DatePickerFragment extends DialogFragment implements
 	}
 
 	public void onDateSet(DatePicker view, int year, int month, int day) {
-		((AssignmentActivity) getActivity()).writeAssignmentDate(year, month, day);
+		((AssignmentActivity) getActivity()).writeAssignmentDate(month, day);
 	}
 }

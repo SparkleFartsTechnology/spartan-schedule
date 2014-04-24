@@ -128,7 +128,7 @@ public class AssignmentActivity extends Activity {
 			alarmMgr.cancel(alarmIntent);
 		}
 
-		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+		alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
 				calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
 				alarmIntent);
 	}

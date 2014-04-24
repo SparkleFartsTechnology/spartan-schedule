@@ -20,7 +20,8 @@ public class DueAssignmentActvity extends Activity {
 	private ScrollView scroll;
 	private LinearLayout dueLayout;
 	private LinearLayout.LayoutParams Params;
-	private Calendar cal;
+	private Calendar currentCal;
+	private Calendar assignmentCal;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +33,18 @@ public class DueAssignmentActvity extends Activity {
 				LinearLayout.LayoutParams.WRAP_CONTENT);
 		getAssignments();
 	}
-	
-	
-	private void getDates(String Index){
+
+	private boolean checkDates(String Index) {
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(context);
-		cal.setTimeInMillis(pref.getLong(Index, 0));
-		cal.add(Calendar.DAY_OF_MONTH, 1);
+		currentCal = Calendar.getInstance();
+		assignmentCal = Calendar.getInstance();
+		assignmentCal.setTimeInMillis(pref.getLong(Index, 0));
+		if (assignmentCal.get(Calendar.DAY_OF_YEAR) + 1 == currentCal
+				.get(Calendar.DAY_OF_YEAR)) {
+			return true;
+		}
+		return false;
 	}
 
 	private void getAssignments() {
@@ -56,13 +62,19 @@ public class DueAssignmentActvity extends Activity {
 			tempAssignmentCount = 0;
 			while (pref.contains(tempClassName
 					+ Integer.toString(tempAssignmentCount))) {
-				TextView newDisplay = new TextView(this);
-				newDisplay.setId(tempAssignmentCount);
-				newDisplay.setTextSize(15);
-				newDisplay.setText(pref.getString(
-						tempClassName + Integer.toString(tempAssignmentCount),
-						""));
-				dueLayout.addView(newDisplay);
+				if (checkDates(tempClassName
+						+ Integer.toString(tempAssignmentCount) + "MilliDate")) {
+					TextView newDisplay = new TextView(this);
+					newDisplay.setId(tempAssignmentCount);
+					newDisplay.setTextSize(15);
+					newDisplay
+							.setText(pref.getString(
+									tempClassName
+											+ Integer
+													.toString(tempAssignmentCount),
+									""));
+					dueLayout.addView(newDisplay);
+				}
 				tempAssignmentCount = tempAssignmentCount + 1;
 			}
 			tempClassCount = tempClassCount + 1;

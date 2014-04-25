@@ -33,10 +33,10 @@ public class AssignmentActivity extends Activity {
 	private String tempAssignmentBin;
 	private String displayText;
 	private String assignmentDate;
+	private String assignmentDateName;
 	private int tempAssignmentCount;
 	private int assignmentCount;
 	private int assignmentDeleteId;
-	private int assignmentDateId;
 	private LinearLayout.LayoutParams Params;
 	private AlarmManager alarmMgr;
 	private PendingIntent alarmIntent;
@@ -63,7 +63,8 @@ public class AssignmentActivity extends Activity {
 	OnClickListener assignmentClick = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			assignmentDateId = v.getId();
+			TextView assignmentText = (TextView) findViewById(v.getId());
+			assignmentDateName = assignmentText.getText().toString();
 			DialogFragment newFragment = new DatePickerFragment();
 			newFragment.show(getFragmentManager(), "Set Due Date");
 		}
@@ -128,7 +129,7 @@ public class AssignmentActivity extends Activity {
 			alarmMgr.cancel(alarmIntent);
 		}
 
-		alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
+		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
 				calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
 				alarmIntent);
 	}
@@ -158,7 +159,9 @@ public class AssignmentActivity extends Activity {
 			newDisplay.setOnLongClickListener(deleteAssignment);
 			newDisplay.setTextSize(15);
 			if (pref.contains(assignmentIndex
-					+ Integer.toString(assignmentCount) + "Date")) {
+					+ pref.getString(
+							assignmentIndex + Integer.toString(assignmentCount),
+							"") + "Date")) {
 				displayText = displayText
 						+ "  Due Date:"
 						+ pref.getString(
@@ -188,12 +191,10 @@ public class AssignmentActivity extends Activity {
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		pref.edit()
-				.putString(
-						assignmentIndex + Integer.toString(assignmentDateId)
-								+ "Date", assignmentDate)
-				.putLong(
-						assignmentIndex + Integer.toString(assignmentDateId)
-								+ "MilliDate", cal.getTimeInMillis()).commit();
+				.putString(assignmentIndex + assignmentDateName + "Date",
+						assignmentDate)
+				.putLong(assignmentIndex + assignmentDateName + "MilliDate",
+						cal.getTimeInMillis()).commit();
 		loadAssignment();
 
 	}

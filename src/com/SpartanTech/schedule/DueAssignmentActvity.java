@@ -34,13 +34,11 @@ public class DueAssignmentActvity extends Activity {
 		getAssignments();
 	}
 
-	private boolean checkDates(String Index) {
-		SharedPreferences pref = PreferenceManager
-				.getDefaultSharedPreferences(context);
+	private boolean checkDates(Long Index) {
 		currentCal = Calendar.getInstance();
 		assignmentCal = Calendar.getInstance();
-		assignmentCal.setTimeInMillis(pref.getLong(Index, 0));
-		if (assignmentCal.get(Calendar.DAY_OF_YEAR) + 1 == currentCal
+		assignmentCal.setTimeInMillis(Index);
+		if (currentCal.get(Calendar.DAY_OF_YEAR) + 1 == assignmentCal
 				.get(Calendar.DAY_OF_YEAR)) {
 			return true;
 		}
@@ -62,8 +60,14 @@ public class DueAssignmentActvity extends Activity {
 			tempAssignmentCount = 0;
 			while (pref.contains(tempClassName
 					+ Integer.toString(tempAssignmentCount))) {
-				if (checkDates(tempClassName
-						+ Integer.toString(tempAssignmentCount) + "MilliDate")) {
+				if (checkDates(pref
+						.getLong(
+								tempClassName
+										+ pref.getString(
+												tempClassName
+														+ Integer
+																.toString(tempAssignmentCount),
+												"") + "MilliDate", 0))) {
 					TextView newDisplay = new TextView(this);
 					newDisplay.setId(tempAssignmentCount);
 					newDisplay.setTextSize(15);

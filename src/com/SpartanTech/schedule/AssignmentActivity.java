@@ -166,8 +166,11 @@ public class AssignmentActivity extends Activity {
 						+ "  Due Date:"
 						+ pref.getString(
 								assignmentIndex
-										+ Integer.toString(assignmentCount)
-										+ "Date", "");
+										+ pref.getString(
+												assignmentIndex
+														+ Integer
+																.toString(assignmentCount),
+												"") + "Date", "");
 			}
 			newDisplay.setText(displayText);
 			assignmentLayout.addView(newDisplay);

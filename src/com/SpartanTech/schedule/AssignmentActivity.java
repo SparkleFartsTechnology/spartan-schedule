@@ -14,11 +14,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -158,22 +161,20 @@ public class AssignmentActivity extends Activity {
 			newDisplay.setOnClickListener(assignmentClick);
 			newDisplay.setOnLongClickListener(deleteAssignment);
 			newDisplay.setTextSize(15);
-			if (pref.contains(assignmentIndex
-					+ pref.getString(
-							assignmentIndex + Integer.toString(assignmentCount),
-							"") + "Date")) {
-				displayText = displayText
-						+ "  Due Date:"
-						+ pref.getString(
-								assignmentIndex
-										+ pref.getString(
-												assignmentIndex
-														+ Integer
-																.toString(assignmentCount),
-												"") + "Date", "");
-			}
 			newDisplay.setText(displayText);
-			assignmentLayout.addView(newDisplay);
+			if (pref.contains(assignmentIndex + displayText + "Date")) {
+				LinearLayout dateLayout = new LinearLayout(this);
+				TextView newDate = new TextView(this);
+				dateLayout.setOrientation(LinearLayout.HORIZONTAL);
+				newDate.setText(" Due Date:"
+						+ pref.getString(
+								assignmentIndex + displayText + "Date", ""));
+				dateLayout.addView(newDisplay);
+				dateLayout.addView(newDate);
+				assignmentLayout.addView(dateLayout);
+			} else {
+				assignmentLayout.addView(newDisplay);
+			}
 			assignmentCount = assignmentCount + 1;
 		}
 		scroll.addView(assignmentLayout);
@@ -191,8 +192,10 @@ public class AssignmentActivity extends Activity {
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		cal.set(Calendar.MONTH, month);
 		assignmentDate = sdf.format(cal.getTime());
+		System.out.println(assignmentDate);
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(context);
+		System.out.println(assignmentIndex + assignmentDateName + "Date");
 		pref.edit()
 				.putString(assignmentIndex + assignmentDateName + "Date",
 						assignmentDate)

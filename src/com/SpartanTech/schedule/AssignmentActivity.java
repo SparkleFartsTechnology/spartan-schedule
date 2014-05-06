@@ -1,5 +1,6 @@
 package com.SpartanTech.schedule;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -41,12 +42,12 @@ public class AssignmentActivity extends Activity {
 	private AlarmManager alarmMgr;
 	private PendingIntent alarmIntent;
 	private Calendar cal;
-	private SimpleDateFormat sdf;
+	private DateFormat df;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		sdf = new SimpleDateFormat("M/dd");
+		df = DateFormat.getDateInstance(DateFormat.SHORT);
 		setContentView(R.layout.activity_assignment);
 		scroll = (ScrollView) findViewById(R.id.assignmentMainScroll);
 		Params = new LinearLayout.LayoutParams(
@@ -188,7 +189,7 @@ public class AssignmentActivity extends Activity {
 		cal = Calendar.getInstance();
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		cal.set(Calendar.MONTH, month);
-		assignmentDate = sdf.format(cal.getTime());
+		assignmentDate = df.format(cal.getTime());
 		System.out.println(assignmentDate);
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(context);

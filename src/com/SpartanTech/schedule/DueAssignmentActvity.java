@@ -70,7 +70,7 @@ public class DueAssignmentActvity extends Activity {
 												"") + "MilliDate", 0))) {
 					TextView newDisplay = new TextView(this);
 					newDisplay.setId(tempAssignmentCount);
-					newDisplay.setTextSize(15);
+					newDisplay.setTextSize(20);
 					newDisplay
 							.setText(pref.getString(
 									tempClassName

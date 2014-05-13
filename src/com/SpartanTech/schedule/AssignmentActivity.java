@@ -158,11 +158,12 @@ public class AssignmentActivity extends Activity {
 			newDisplay.setId(assignmentCount);
 			newDisplay.setOnClickListener(assignmentClick);
 			newDisplay.setOnLongClickListener(deleteAssignment);
-			newDisplay.setTextSize(15);
+			newDisplay.setTextSize(20);
 			newDisplay.setText(displayText);
 			if (pref.contains(assignmentIndex + displayText + "Date")) {
 				LinearLayout dateLayout = new LinearLayout(this);
 				TextView newDate = new TextView(this);
+				newDate.setTextSize(20);
 				dateLayout.setOrientation(LinearLayout.HORIZONTAL);
 				newDate.setText(" Due Date:"
 						+ pref.getString(

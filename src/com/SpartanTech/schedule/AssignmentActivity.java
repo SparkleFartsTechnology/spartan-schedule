@@ -99,6 +99,9 @@ public class AssignmentActivity extends Activity {
 				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						writeAssignment(userInput.getText().toString());
+						assignmentDateName = userInput.getText().toString();
+						DialogFragment newFragment = new DatePickerFragment();
+						newFragment.show(getFragmentManager(), "Set Due Date");
 						loadAssignment();
 					}
 				})

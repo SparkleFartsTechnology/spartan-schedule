@@ -21,7 +21,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
 				new Intent(context, DueAssignmentActvity.class), 0);
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-				context).setSmallIcon(R.drawable.example_picture)
+				context).setSmallIcon(R.drawable.spartan_icon)
 				.setContentTitle("Assignment Notification")
 				.setContentText("Tap to view upcoming assignments");
 		mBuilder.setContentIntent(contentIntent);

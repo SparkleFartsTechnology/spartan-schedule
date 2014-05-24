@@ -1,7 +1,6 @@
 package com.SpartanTech.schedule;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import android.app.Activity;
@@ -43,6 +42,7 @@ public class AssignmentActivity extends Activity {
 	private PendingIntent alarmIntent;
 	private Calendar cal;
 	private DateFormat df;
+	private Bundle dateArgs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,15 @@ public class AssignmentActivity extends Activity {
 		public void onClick(View v) {
 			TextView assignmentText = (TextView) findViewById(v.getId());
 			assignmentDateName = assignmentText.getText().toString();
+			dateArgs = new Bundle();
+			SharedPreferences pref = PreferenceManager
+					.getDefaultSharedPreferences(context);
+			dateArgs.putString(
+					"dateInfo",
+					pref.getString(assignmentIndex + assignmentDateName
+							+ "Date", "Ballsack"));
 			DialogFragment newFragment = new DatePickerFragment();
+			newFragment.setArguments(dateArgs);
 			newFragment.show(getFragmentManager(), "Set Due Date");
 		}
 	};
@@ -100,6 +108,8 @@ public class AssignmentActivity extends Activity {
 					public void onClick(DialogInterface dialog, int id) {
 						writeAssignment(userInput.getText().toString());
 						assignmentDateName = userInput.getText().toString();
+						dateArgs = new Bundle();
+						dateArgs.putString("dateInfo", "");
 						DialogFragment newFragment = new DatePickerFragment();
 						newFragment.show(getFragmentManager(), "Set Due Date");
 						loadAssignment();
@@ -189,12 +199,12 @@ public class AssignmentActivity extends Activity {
 				.commit();
 	}
 
-	public void writeAssignmentDate(int month, int day) {
+	public void writeAssignmentDate(int month, int day, int year) {
 		cal = Calendar.getInstance();
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		cal.set(Calendar.MONTH, month);
+		cal.set(Calendar.YEAR, year);
 		assignmentDate = df.format(cal.getTime());
-		System.out.println(assignmentDate);
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		System.out.println(assignmentIndex + assignmentDateName + "Date");

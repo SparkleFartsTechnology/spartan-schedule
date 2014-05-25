@@ -35,10 +35,12 @@ public class DueAssignmentActvity extends Activity {
 	}
 
 	private boolean checkDates(Long Index) {
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(context);
 		currentCal = Calendar.getInstance();
 		assignmentCal = Calendar.getInstance();
 		assignmentCal.setTimeInMillis(Index);
-		if (currentCal.get(Calendar.DAY_OF_YEAR) + 1 == assignmentCal
+		if (currentCal.get(Calendar.DAY_OF_YEAR) + Integer.parseInt(pref.getString("dueDateWindowKey", "1")) >= assignmentCal
 				.get(Calendar.DAY_OF_YEAR)) {
 			return true;
 		}

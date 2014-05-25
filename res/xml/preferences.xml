@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    
+
+    <PreferenceCategory
+        android:title="Reminder Settings">
+        <EditTextPreference
+            android:defaultValue="1"
+            android:dialogTitle="Enter Number in Days"
+            android:inputType="number"
+            android:key="dueDateWindowKey"
+            android:summary="The Number of Days before the Due Date, That The Reminder Will Count as Due Soon"
+            android:title="Assignment Due Date Window" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

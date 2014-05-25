@@ -55,6 +55,8 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_settings:
+			Intent settingsIntent = new Intent(context, SettingsActivity.class);
+			startActivity(settingsIntent);
 			return true;
 		case R.id.add_class:
 			LayoutInflater li = LayoutInflater.from(context);

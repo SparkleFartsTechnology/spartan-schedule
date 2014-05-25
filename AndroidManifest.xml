@@ -28,7 +28,7 @@
         </activity>
         <activity
             android:name="com.SpartanTech.schedule.ConfirmDelete"
-            android:label="@string/title_activity_assignment_info" >
+            android:label="@string/confirm_delete_assignment" >
         </activity>
         <activity
             android:name="com.SpartanTech.schedule.TimePickerFragment"
@@ -40,10 +40,15 @@
             android:enabled="true"
             android:exported="true" >
         </receiver>
-
+        
         <activity
             android:name="com.SpartanTech.schedule.DueAssignmentActvity"
             android:label="@string/title_activity_due_assignment_actvity" >
+        </activity>
+        
+         <activity
+            android:name="com.SpartanTech.schedule.SettingsActivity"
+            android:label="@string/title_activity_SettingsActivity" >
         </activity>
     </application>
 

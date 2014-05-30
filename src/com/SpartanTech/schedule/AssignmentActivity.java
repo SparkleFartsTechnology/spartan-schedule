@@ -128,31 +128,7 @@ public class AssignmentActivity extends Activity {
 
 	}
 
-	public void setReminderTime(int hourOfDay, int minute) {
-		alarmMgr = (AlarmManager) context
-				.getSystemService(Context.ALARM_SERVICE);
-		Intent intent = new Intent(context, AlarmReceiver.class);
-		alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(System.currentTimeMillis());
-		calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-		calendar.set(Calendar.MINUTE, minute);
-
-		if (alarmMgr != null) {
-			alarmMgr.cancel(alarmIntent);
-		}
-
-		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-				calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
-				alarmIntent);
-	}
-
-	public void setReminder(View v) {
-		DialogFragment newFragment = new TimePickerFragment();
-		newFragment.show(getFragmentManager(), "Select Time for Reminder");
-
-	}
+	
 
 	private void loadAssignment() {
 		scroll.removeView(assignmentLayout);

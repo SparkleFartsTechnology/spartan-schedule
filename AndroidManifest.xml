@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="16"
         android:targetSdkVersion="18" />
 
     <application
@@ -26,14 +26,7 @@
             android:name="com.SpartanTech.schedule.AssignmentActivity"
             android:label="@string/title_activity_assignment" >
         </activity>
-        <activity
-            android:name="com.SpartanTech.schedule.ConfirmDelete"
-            android:label="@string/confirm_delete_assignment" >
-        </activity>
-        <activity
-            android:name="com.SpartanTech.schedule.TimePickerFragment"
-            android:label="@string/title_activity_time_picker_fragment" >
-        </activity>
+
 
         <receiver
             android:name="com.SpartanTech.schedule.AlarmReceiver"

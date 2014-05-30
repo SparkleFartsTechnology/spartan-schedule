@@ -10,6 +10,19 @@
             android:key="dueDateWindowKey"
             android:summary="The Number of Days before the Due Date, That The Reminder Will Count as Due Soon"
             android:title="Assignment Due Date Window" />
+
+        <com.SpartanTech.schedule.TimePickerSetting
+            android:title="Set Reminder Time"
+            android:dialogTitle="Time of Reminder"
+            android:summary="This is at what time the app will give you a reminder"
+            android:key="ReminderTime"
+
+            />
+
     </PreferenceCategory>
+
+
+
+
 
 </PreferenceScreen>

@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
 
 public class AlarmReceiver extends BroadcastReceiver {
 	public AlarmReceiver() {
@@ -20,7 +19,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	private void showNotification(Context context) {
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
 				new Intent(context, DueAssignmentActvity.class), 0);
-		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+		Notification.Builder mBuilder = new Notification.Builder(
 				context).setSmallIcon(R.drawable.spartan_icon)
 				.setContentTitle("Assignment Notification")
 				.setContentText("Tap to view upcoming assignments");
